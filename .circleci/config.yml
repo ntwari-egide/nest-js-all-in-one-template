@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   checkout:
-    working_directory: ~/labusafax
+    working_directory: ~/backend
     docker:
       - image: circleci/node:12.22-browsers
     steps:
@@ -10,9 +10,9 @@ jobs:
       - save_cache:
           key: v0-repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/labusafax
+            - ~/backend
   dependencies:
-    working_directory: ~/labusafax
+    working_directory: ~/backend
     docker:
       - image: circleci/node:12.22-browsers
     steps:
@@ -31,9 +31,9 @@ jobs:
       - save_cache:
           key: v0-node-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - ~/labusafax/node_modules
+            - ~/backend/node_modules
   lint:
-    working_directory: ~/labusafax
+    working_directory: ~/backend
     docker:
       - image: circleci/node:12.22-browsers
     steps:
@@ -48,16 +48,16 @@ jobs:
       #     name: Prettier
       #     command: npm run prettier:check
   test:
-    working_directory: ~/labusafax
+    working_directory: ~/backend
     docker:
       - image: circleci/node:12.22-browsers
       - image: circleci/postgres:12
         environment:
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
-          POSTGRES_USER: postgres
+          POSTGRES_USER: ntwari
           POSTGRES_PASSWORD: 123
-          POSTGRES_DB: labusafax
+          POSTGRES_DB: electrica
     steps:
       - restore_cache:
           key: v0-repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -76,7 +76,7 @@ jobs:
           name: E2E
           command: npm run test
   build:
-    working_directory: ~/labusafax
+    working_directory: ~/backend
     docker:
       - image: circleci/node:12.22-browsers
     steps:
@@ -90,7 +90,7 @@ jobs:
       - save_cache:
           key: v0-build-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/labusafax/dist/labusafax
+            - ~/backend/dist/backend
 
 workflows:
   version: 2

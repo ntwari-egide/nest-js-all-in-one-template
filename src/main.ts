@@ -6,10 +6,8 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     const config = new DocumentBuilder()
-        .setTitle('Electrica back end APIs implementation')
-        .setDescription(
-            'electrica application for controlling and selling electric power',
-        )
+        .setTitle('Nest js all in one template')
+        .setDescription('Here goes the description of the project')
         .setVersion('1.0')
         .build();
 

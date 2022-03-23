@@ -18,6 +18,12 @@ services:
     restart: always
     ports:
       - 5432:5432
+    environment:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_USER: ntwari
+        POSTGRES_PASSWORD: 123
+        POSTGRES_DB: electrica
     env_file:
       - .env
     volumes:
